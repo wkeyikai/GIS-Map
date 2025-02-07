@@ -2,7 +2,7 @@
   <div>
     <gisMap class="map" 
       :center="[lon,lat]"
-      :level="10" 
+      :level="12" 
       :cross="true" 
       :overview="true" >
       <gisMark :lon="lon" :lat="lat" :type="'poi'"></gismark>

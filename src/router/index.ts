@@ -33,7 +33,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHistory('/'),
+  history: createWebHistory('/GIS-Map'),
   routes,
   scrollBehavior(to, from, savedPosition) {
     const container = document.getElementById('router-view-container')

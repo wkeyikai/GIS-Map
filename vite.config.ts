@@ -17,7 +17,7 @@ import Visualizer from 'rollup-plugin-visualizer'
 export default ({ mode }) => {
   const env = { ...loadEnv(mode, process.cwd()) }
   return defineConfig({
-    base: '/',
+    base: '/GIS-Map/',
     plugins: [
       vue(),
       viteCompression(),
