@@ -29,42 +29,42 @@ jobs:
     # 1. 檢出代碼
       - name: Checkout
         uses: actions/checkout@v4
-    #   - name: Setup Pages
-    #     uses: actions/configure-pages@v5
-    #   - name: Build with Jekyll
-    #     uses: actions/jekyll-build-pages@v1
-    #     with:
-    #       source: ./
-    #       destination: ./_site
-    #   - name: Upload artifact
-    #     uses: actions/upload-pages-artifact@v3
-      # 2. 設定 Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
         with:
-          node-version: 18  # 設定 Node.js 版本
-
-      # 3. 安裝依賴
-      - name: Install dependencies
-        run: npm install
-
-      # 4. 使用 Vite 建構專案
-      - name: Build with Vite
-        run: npm run build  # 執行 npm run build 來生成 dist 目錄
-
-      # 5. 停用 Jekyll（確保不會干擾 GitHub Pages）
-      - name: Add .nojekyll
-        run: touch dist/.nojekyll
-
-      # 6. 上傳生成的 dist 目錄作為 GitHub Pages 資料
+          source: ./
+          destination: ./_site
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: dist  # 這裡的 dist 目錄會被作為 GitHub Pages 資料上傳
+        uses: actions/upload-pages-artifact@v3
+      # 2. 設定 Node.js
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 18  # 設定 Node.js 版本
 
-      # 7. 部署到 GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
+      # # 3. 安裝依賴
+      # - name: Install dependencies
+      #   run: npm install
+
+      # # 4. 使用 Vite 建構專案
+      # - name: Build with Vite
+      #   run: npm run build  # 執行 npm run build 來生成 dist 目錄
+
+      # # 5. 停用 Jekyll（確保不會干擾 GitHub Pages）
+      # - name: Add .nojekyll
+      #   run: touch dist/.nojekyll
+
+      # # 6. 上傳生成的 dist 目錄作為 GitHub Pages 資料
+      # - name: Upload artifact
+      #   uses: actions/upload-pages-artifact@v2
+      #   with:
+      #     path: dist  # 這裡的 dist 目錄會被作為 GitHub Pages 資料上傳
+
+      # # 7. 部署到 GitHub Pages
+      # - name: Deploy to GitHub Pages
+      #   uses: actions/deploy-pages@v2
 
   # Deployment job
   deploy:
