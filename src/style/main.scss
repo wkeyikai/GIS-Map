@@ -1,0 +1,56 @@
+/* import base Libs */
+@import 'base.scss';
+h3 {
+  font-size: 26px;
+  line-height: 28px;
+}
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
+html {
+  overflow: hidden;
+}
+span {
+  // white-space: pre-line;
+  // white-space: pre;
+  word-break: normal;
+}
+.van-col {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+body {
+  // @apply bg-neutral-light;
+  @apply bg-primary-900;
+  overflow: hidden;
+}
+.el-popper__arrow {
+  display: none;
+}
+
+.base-input input[type='text'],
+.base-input input[type='password'],
+.base-input input[inputmode='numeric'] {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border-width: 2px;
+  border-color: rgba(255, 255, 255, 0.4);
+  // color: rgba(255, 255, 255, 0.4);
+  padding-left: 44px;
+}
+
+.base-button.is-plain {
+  @apply bg-alpha-light-10 text-secondary-200;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+.base-button {
+  // border: none;
+  // border-radius: 8px;
+  // font-weight: 700;
+  // font-size: 16px;
+  // color: #1d0a00;
+  // background-color: #cad6e8;
+}

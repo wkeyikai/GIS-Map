@@ -1,0 +1,178 @@
+@use 'sass:math';
+// 主題名稱前綴，可以依照專案不同版型替換名稱
+$theme-prefix: 'cp';
+
+/* import tailwindCSS Libs */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+// @import './themes/black.scss';
+
+/* import config Libs */
+// @import './config/easing.scss';
+// @import './config/mixins';
+// @import './config/flexbox.scss';
+// @import './config/grid.scss';
+// @import './config/typography.scss';
+// @import './config/remAdaptor.scss';
+
+/* import effects */
+// @import './effect/coin.scss';
+// @import './effect/leaf.scss';
+
+/* import google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap');
+
+/* set font-face for native path */
+@font-face {
+  font-family: OCR;
+  src: url(../assets/font/OCR.ttf);
+}
+
+@font-face {
+  font-family: 'DS-digit';
+  src: url('../assets/font/DS-digi.ttf');
+}
+@font-face {
+  font-family: Proxima Nova;
+  src: url(../assets/font/ProximaNova.otf);
+}
+
+/* body scroll bar */
+body,
+html,
+#app {
+  height: 100%;
+}
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 0px;
+}
+html,
+body {
+  font-family: 'Proxima Nova';
+  padding: 0px;
+  margin: 0px;
+}
+
+button {
+  font-family: 'Proxima Nova';
+}
+
+// Works on Chrome, Edge, and Safari
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+// Track
+::-webkit-scrollbar-track {
+  @apply bg-alpha-dark-50;
+  border-radius: 12px;
+}
+
+// Handle
+::-webkit-scrollbar-thumb {
+  @apply border-[1px] border-primary-900 bg-alpha-light-05;
+  border-radius: 12px;
+  padding: 2px;
+  border: 1px solid var(--color-primary-900);
+
+  // box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+//  Handle on hover
+::-webkit-scrollbar-thumb:hover {
+  @apply border-[1px] border-primary-900 bg-alpha-light-10;
+  border: 1px solid var(--color-primary-900);
+
+  // background: useColor('alphaLight', 'opacity-1');
+}
+
+:-webkit-autofill,
+:-webkit-autofill:hover,
+:-webkit-autofill:focus,
+:-webkit-autofill:active {
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+// personal Info
+.personal-info {
+  .personal-info-userName {
+    @apply text-white;
+  }
+
+  .personal-info-detail {
+    @apply text-transparent-light-60;
+  }
+}
+
+.van-popup {
+  // background: transparent;
+  .van-picker {
+    // max-width: 600px;
+    margin: auto;
+  }
+}
+
+.cp-break-word {
+  word-break: break-word;
+}
+.el-overlay {
+  background: #00050ccc !important;
+}
+.el-popper {
+  border-radius: 10px;
+}
+
+.el-popover.el-popper.lang-popover {
+  @apply ml-2  rounded-lg bg-primary-800 p-2;
+  border: 1px solid var(--color-primary-600, #3a4c61) !important;
+}
+.help-close .van-dialog__footer {
+  padding: 0 18px 18px 18px;
+}
+//先把一些 css 搬過來
+
+.cp-search-no-game-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 120%;
+  color: rgb(255, 255, 255);
+  text-align: left;
+  padding: 8px 0;
+}
+
+.swiper-pagination {
+  z-index: 2;
+}
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(12, 7, 0, 0.5) !important;
+  opacity: 1 !important;
+  &.swiper-pagination-bullet-active {
+    background: #ffffff !important;
+  }
+}
+.table-width {
+  table {
+    border-top-width: unset;
+    border-bottom-width: unset;
+    border-left-width: unset;
+    border-right-width: unset;
+    tbody,
+    tr,
+    th,
+    td {
+      border-width: inherit;
+      border-color: inherit;
+      border-style: inherit;
+    }
+  }
+}
