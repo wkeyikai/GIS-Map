@@ -205,6 +205,12 @@ GIS.map = function (mapID, draggable_options, tile_options) {
     draggable.appendChild(labelDiv);
     draggable.appendChild(winDiv);
 
+    // 防止手機滑動
+    mapBody.on('touchmove', (ev)=>{
+        ev.preventDefault()
+        ev.stopPropagation()
+    },{ passive: false });
+
     // Draggable options
     var _do = (draggable_options) ? draggable_options : {};
 
@@ -849,7 +855,7 @@ GIS.map = function (mapID, draggable_options, tile_options) {
             xArray.push(XY.X);
             yArray.push(XY.Y);
         }
-        console.log('xArray',xArray)
+        // console.log('xArray',xArray)
         xArray.sort();
         yArray.sort();
         var Lat_min = yArray[0], //latArray[0],
@@ -1426,7 +1432,8 @@ GIS.map = function (mapID, draggable_options, tile_options) {
         ev = ev || win.event;
         var objPos = drag.get(target);
         var mousePos = mouseCoords(ev);
-
+        // console.log('objPos',objPos)
+        // console.log('mousePos',mousePos)
         return { x: mousePos.x - objPos.PX, y: mousePos.y - objPos.PY };
     }
 
@@ -1435,8 +1442,8 @@ GIS.map = function (mapID, draggable_options, tile_options) {
             return { x: ev.pageX, y: ev.pageY };
         }
         return {
-            x: ev.clientX, //+ document.body.scrollLeft - document.body.clientLeft,
-            y: ev.clientY //,+ document.body.scrollTop - document.body.clientTop
+            x: ev.clientX || ev.touches[0].clientX, //+ document.body.scrollLeft - document.body.clientLeft,
+            y: ev.clientY || ev.touches[0].clientY//,+ document.body.scrollTop - document.body.clientTop
         };
     }
     //    var drag = {
@@ -1473,9 +1480,11 @@ GIS.map = function (mapID, draggable_options, tile_options) {
 
         if (!obj) return;
         var mousedown = function (ev) {
+            // ev.preventDefault()
+            // ev.stopPropagation()
 
             if (ev.button == 2) { return false }; //防右鍵
-
+            // console.log('ev.touches',ev)
             obj.style.cursor = "move";
             //obj.addEventListener('mousemove', mousemove, true);
             //if (dragStatus != 'global') return;
@@ -1485,22 +1494,29 @@ GIS.map = function (mapID, draggable_options, tile_options) {
                 //ele.on('mousemove', mousemove, true);
                 ele.addEventListener('mouseup', mouseup, true);
                 ele.addEventListener('mousemove', mousemove, true);
+                // ele.addEventListener('touchstart', mouseup, true);
+                // ele.addEventListener('touchmove', mousemove, true);
             }
             else
                 obj.setCapture();
 
             dragObject = obj;
             mouseOffset = getMouseOffset(obj, ev);
-
+            // console.log('mouseOffset',mouseOffset)
             var mousePos = mouseCoords(ev); //canvas tmp
             tempX = mousePos.x + totalX; //canvas tmp
             tempY = mousePos.y + totalY; //canvas tmp
+            // console.log('mouseCoords',mousePos)
+
             return false;
         }
         obj.on('mousedown', mousedown);
+        obj.on('touchstart', mousedown,{ passive: false });
         var mousemove = function (ev) {
             //console.log('move');
             //if (dragStatus != 'global') return;
+            // ev.preventDefault()
+            // ev.stopPropagation()
             var mousePos = mouseCoords(ev);
             if (dragObject) {
                 var x = mousePos.x - mouseOffset.x,
@@ -1538,7 +1554,11 @@ GIS.map = function (mapID, draggable_options, tile_options) {
 
         }
         obj.on('mousemove', mousemove);
-        var mouseup = function () {
+        obj.on('touchmove', mousemove,{ passive: false });
+
+        var mouseup = function (ev) {
+            // ev.preventDefault()
+            // ev.stopPropagation()
             //if (ev.button == 2) { return false }; //防右鍵
             //if (dragStatus != 'global') return;
             dragObject = null;
@@ -1550,12 +1570,15 @@ GIS.map = function (mapID, draggable_options, tile_options) {
                 //ele.off('mousemove', mousemove, true);
                 ele.removeEventListener('mouseup', mouseup, true);
                 ele.removeEventListener('mousemove', mousemove, true);
+                // ele.removeEventListener('touchend', mouseup, true);
+                // ele.removeEventListener('touchmove', mousemove, true);
             }
             else
                 obj.releaseCapture();
             return;
         }
         obj.on('mouseup', mouseup);
+        obj.on('touchend', mouseup,{ passive: false });
 
         var click = function (ev) {
             //螢幕座標轉換
@@ -1563,6 +1586,9 @@ GIS.map = function (mapID, draggable_options, tile_options) {
         }
         obj.on('click', click);
         var mouseover = function (ev) {
+            // ev.preventDefault()
+            // ev.stopPropagation()
+
             if (GIS.BrowserType['Firefox']) {
                 ev.preventDefault();
             }

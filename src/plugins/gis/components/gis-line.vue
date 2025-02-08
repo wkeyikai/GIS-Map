@@ -23,7 +23,7 @@ onMounted(()=>{
 watch(
 	()=>map.value,
 	()=>{
-		console.log('props.path',props.path)
+		// console.log('props.path',props.path)
 		map.value.line({...props})
 	}
 )
